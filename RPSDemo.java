@@ -1,0 +1,158 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+class RPSDemo extends JFrame implements ActionListener
+{
+	static int bt,sc;
+	JLabel l1,l2,l3,l4,l5,l6;
+	JRadioButton rb1,rb2,rb3;
+	JButton btn1,btn2;
+	RPSDemo()
+	{
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
+		setTitle("RPS Game");
+		setSize(1000,800);
+		setLayout(null);
+		getContentPane().setBackground(new Color(150,150,30));
+		btn1=new JButton("Play");
+		btn2=new JButton("Your Score");
+		ImageIcon i1=new ImageIcon("Rock.png");
+		ImageIcon i2=new ImageIcon("Paper.png");
+		ImageIcon i3=new ImageIcon("Scissors.png");
+		l1=new JLabel("Let's Play");
+		l2=new JLabel("Rock Paper Scissors");
+		l3=new JLabel(i1);
+		l4=new JLabel(i2);
+		l5=new JLabel(i3);
+		l6=new JLabel();
+		rb1=new JRadioButton("Rock");
+		rb2=new JRadioButton("Paper");
+		rb3=new JRadioButton("Scissors");
+		ButtonGroup bg=new ButtonGroup();
+		l1.setFont(new Font("Calibri",Font.BOLD,30));
+		l2.setFont(new Font("Calibri",Font.BOLD,30));
+		l6.setFont(new Font("Calibri",Font.BOLD,20));
+		rb1.setFont(new Font("Calibri",Font.BOLD,20));
+		rb2.setFont(new Font("Calibri",Font.BOLD,20));
+		rb3.setFont(new Font("Calibri",Font.BOLD,20));
+		rb1.setBackground(new Color(150,150,30));
+		rb2.setBackground(new Color(150,150,30));
+		rb3.setBackground(new Color(150,150,30));
+		bg.add(rb1);
+		bg.add(rb2);
+		bg.add(rb3);
+		add(btn1);
+		add(btn2);
+		add(l1);
+		add(l2);
+		add(l3);
+		add(l4);
+		add(l5);
+		add(l6);
+		add(rb1);
+		add(rb2);
+		add(rb3);
+		l1.setBounds(400,15,150,30);
+		l2.setBounds(350,100,300,30);
+		l3.setBounds(50,150,275,275);
+		l4.setBounds(350,150,250,250);
+		l5.setBounds(650,150,250,250);
+		rb1.setBounds(150,425,100,30);
+		rb2.setBounds(425,425,100,30);
+		rb3.setBounds(700,425,120,30);
+		btn1.setBounds(350,525,100,30);
+		btn2.setBounds(500,525,150,30);
+		l6.setBounds(425,575,150,30);
+		btn1.addActionListener(this);
+		btn2.addActionListener(this);
+	}
+	public void actionPerformed(ActionEvent e)
+	{
+		int n = getRandomNumber(1,4);
+		if(e.getSource().equals(btn1))
+		{
+			if(rb1.isSelected())
+			{
+				if(n == 2)
+				{
+					l6.setText("You Lose!!");
+					l6.setForeground(Color.red);
+					bt++;
+				}
+				if(n == 3)
+				{
+					l6.setText("You Win");
+					l6.setForeground(Color.green);
+					sc++;
+				}
+				if(n == 1)
+				{
+					l6.setText("It's Drawn");
+					l6.setForeground(Color.blue);
+				}
+			}
+			if(rb2.isSelected())
+			{
+				if(n == 3)
+				{
+					l6.setText("You Lose!!");
+					l6.setForeground(Color.red);
+					bt++;
+				}
+				if(n == 1)
+				{
+					l6.setText("You Win");
+					l6.setForeground(Color.green);
+					sc++;
+				}
+				if(n == 2)
+				{
+					l6.setText("It's Drawn");
+					l6.setForeground(Color.blue);
+				}
+			}
+			if(rb3.isSelected())
+			{
+				if(n == 1)
+				{
+					l6.setText("You Lose!!");
+					l6.setForeground(Color.red);
+					bt++;
+				}
+				if(n == 2)
+				{
+					l6.setText("You Win");
+					l6.setForeground(Color.green);
+					sc++;
+				}
+				if(n == 3)
+				{
+					l6.setText("It's Drawn");
+					l6.setForeground(Color.blue);
+				}
+			}
+		}
+		if(e.getSource().equals(btn2))
+		{
+			String s = "Your Score Is : " + sc + " , " + "Bot Score Is : " + bt;
+			JOptionPane.showMessageDialog(null,s,"Score Board",JOptionPane.PLAIN_MESSAGE);
+		}
+	}
+	int getRandomNumber(int min, int max)
+	{
+        return (int) ((Math.random() * (max - min)) + min);
+    }
+	public static void main(String args[])
+	{
+		SwingUtilities.invokeLater(
+			new Runnable()
+			{
+				public void run()
+				{
+					new RPSDemo();
+				}
+			}
+			);
+	}
+}
